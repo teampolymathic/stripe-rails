@@ -64,13 +64,24 @@ or if you are on heroku:
 heroku config:add STRIPE_SECRET_KEY=sk_test_xxyyzz
 ```
 
-You can also set this value from inside ruby configuration code:
+For non-production environments, you can set this in secrets.yml:
 
-```ruby
-config.stripe.secret_key = "sk_test_xxyyzz"
+```yaml
+stripe: &stripe
+  stripe_secret_key: sk_test_xxxx
+  stripe_publishable_key: pk_test_xxxxx
+
+development:
+  <<: *stripe
+
+test:
+  <<: *stripe
+
+production:
+  stripe_publishable_key: pk_live_xxxxxxx
 ```
 
-In either case, it is recommended that you *not* check in this value into source control.
+In either case, it is recommended that you *not* check your production secret key into source control.
 
 You can verify that your api is set up and functioning properly by running the following command:
 
@@ -79,23 +90,7 @@ rake stripe:verify
 ```
 
 If you are going to be using stripe.js, then you will also need to set the value of your
-publishiable key. A nice way to do it is to set your test publishable for all environments:
-
-```ruby
-# config/application.rb
-# ...
-config.stripe.publishable_key = 'pk_test_XXXYYYZZZ'
-```
-
-And then override it to use your live key in production only
-
-```ruby
-# config/environments/production.rb
-# ...
-config.stripe.publishable_key = 'pk_live_XXXYYYZZZ'
-```
-
-This key will be publicly visible on the internet, so it is ok to put in your source.
+publishable key. This key will be publicly visible on the internet, so it is ok to put in your source.
 
 ### Setup your payment configuration
 

@@ -31,13 +31,13 @@ module Stripe
         value = app.config.stripe.send(key)
         Stripe.send("#{key}=", value) unless value.nil?
       end
-      secret_key = app.config.stripe.secret_key
-      Stripe.api_key = secret_key unless secret_key.nil?
+      secret_key = app.secrets.stripe_secret_key
+      Stripe.api_key = secret_key unless secret_key.nil? 
+
       $stderr.puts <<-MSG unless Stripe.api_key
 No stripe.com API key was configured for environment #{::Rails.env}! this application will be
 unable to interact with stripe.com. You can set your API key with either the environment
-variable `STRIPE_SECRET_KEY` (recommended) or by setting `config.stripe.secret_key` in your
-environment file directly.
+variable `STRIPE_SECRET_KEY` (recommended) or by setting `stripe_secret_key` in your secrets.yml for :#{::Rails.env}.
       MSG
     end
 
