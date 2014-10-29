@@ -1,4 +1,4 @@
-
+  
 namespace :stripe do
 
   desc 'verify your stripe.com authentication configuration'
@@ -25,5 +25,9 @@ namespace :stripe do
   end
 
   desc "create all plans and coupons defined in config/stripe/{plans|coupons}.rb"
-  task 'prepare' => ['plans:prepare', 'coupons:prepare']
+  task 'prepare' => ['plans:prepare', 'coupons:prepare', 'migrate']
+
+  task 'migrate' => 'environment' do |t, args|
+    `RAILS_ENV=#{::Rails.env} bundle exec rails generate stripe:migrate`
+  end
 end
