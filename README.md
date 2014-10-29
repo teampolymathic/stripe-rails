@@ -109,6 +109,12 @@ create  config/stripe/plans.rb
 create  config/stripe/coupons.rb
 ```
 
+### Setup your models
+
+If your Stripe install supports Orders and/or Customers (and most support at least one of those), migrations can be generated with `bundle exec rails generate stripe:migrations`.
+
+If you aren't using Orders, you can use `--skip-orders`; similarly, you can use `--skip-customers` if you don't need Customers.
+
 ### Configuring your plans and coupons
 
 Use the plan builder to define as many plans as you want in `config/stripe/plans.rb`
