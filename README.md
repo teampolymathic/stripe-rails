@@ -3,6 +3,12 @@
 [![Build Status](https://travis-ci.org/thefrontside/stripe-rails.png?branch=master)](https://travis-ci.org/thefrontside/stripe-rails)
 [![Dependency Status](https://gemnasium.com/thefrontside/stripe-rails.png)](https://gemnasium.com/thefrontside/stripe-rails)
 
+> **Note:** This Polymathic fork of stripe-rails expands the functionality of the original gem, by TheFrontSide, and we're very grateful to build off of their initial repository. We also use ideas from:
+
+> - [@jwaldrip](jwaldrip/stripe_rails) with his stripe_rails gem (underscore, not hyphen)
+> - Our own [@colinyoung](colinyoung/stripe_order)'s stripe_order gem
+
+> And now, back to your regularly scheduled programming.
 
 This gem can help your rails application integrate with Stripe in the following ways
 
